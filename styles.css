@@ -474,20 +474,44 @@ body {
 .services {
   max-width: 1100px;
   margin: auto;
-  padding: 90px 20px;
-  min-height: 100vh;
+  padding: 30px 20px 10px 20px;
 }
 
-.services h2 {
+.experience {
+  max-width: 1100px;
+  margin: auto;
+  padding: 10px 20px 90px 20px;
+}
+
+.services h2, .experience h2 {
   font-size: 38px;
   font-weight: 700;
   margin-bottom: 12px;
 }
 
-.subtitle {
+.services .subtitle {
   color: #b5b5b5;
   max-width: 650px;
   margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+.service-card {
+  background: linear-gradient(180deg, #1a1a1a, #121212);
+  border-radius: 18px;
+  padding: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.service-card h3 {
+  font-size: 20px;
+  margin: 20px 0 12px 0;
+  color: #fff;
+}
+
+.service-card p {
+  color: #b5b5b5;
   line-height: 1.6;
 }
 
@@ -547,5 +571,5 @@ body {
   }
 }
 .projects {
-  margin-top: 120px;
+  margin-top: 155px;
 }
