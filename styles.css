@@ -20,7 +20,7 @@ html{
 
 body{
   margin:0;
-  padding-top:80px; /* ✅ FIXED NAVBAR OFFSET */
+  padding-top:0px; /* ✅ FIXED NAVBAR OFFSET */
   font-family:Inter,system-ui,Segoe UI,Arial;
   background:linear-gradient(180deg,var(--bg),#101010 60%);
   color:#fff;
@@ -360,13 +360,26 @@ section{
 
 .project-cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap:30px;
+  max-width:1100px;
+  margin:30px auto 0;
 }
 
+@media (max-width: 1000px) {
+  .project-cards{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .project-cards{
+    grid-template-columns: 1fr;
+  }
+}
 .project-card{
   background:rgba(55, 53, 53, 0.39);
-  padding:22px;
+  padding:32px;
   border-radius:18px;
   text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,0.35);
@@ -412,4 +425,97 @@ section{
 
 .project-btn:hover{
   background:#eb6810;
+}
+.contact{
+  font-size:25px;
+}
+body {
+  background: radial-gradient(circle at top, #111 0%, #000 60%);
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+.services {
+  max-width: 1100px;
+  margin: auto;
+  padding: 90px 20px;
+}
+
+.services h2 {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: #b5b5b5;
+  max-width: 650px;
+  margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+.services-grid {
+  display: flex;
+  flex-direction: row;          /* horizontal layout */
+  flex-wrap: wrap;             /* allow wrapping on smaller widths */
+  gap: 32px;
+  justify-content: center;     /* center cards horizontally */
+}
+/* ensure each card aims for a reasonable width and can shrink */
+.services-grid .card {
+  flex: 1 1 300px;   /* grow/shrink with a base width */
+  min-width: 280px;
+}
+
+.card {
+  background: linear-gradient(180deg, #1a1a1a, #121212);
+  border-radius: 18px;
+  padding: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.card h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.location {
+  display: block;
+  font-size: 14px;
+  color: #9a9a9a;
+  margin-bottom: 20px;
+}
+
+.card ul {
+  padding-left: 18px;
+}
+
+.card ul li {
+  color: #d6d6d6;
+  margin-bottom: 12px;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+@media (max-width: 600px) {
+  .services-grid {
+    flex-direction: column;     /* stack vertically on narrow screens */
+  }
+}
+.projects{
+  text-align: center;
+  margin-top: 95px;
+}
+.services{
+  margin-top: -220px;
+}
+.about{
+  margin-top: -170px;
 }
