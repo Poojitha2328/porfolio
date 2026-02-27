@@ -344,7 +344,10 @@ section{
   }
 
   .nav{display:none;position:absolute;top:var(--header-height);left:0;right:0;background:rgba(20,20,20,0.98);backdrop-filter:blur(10px);flex-direction:column;padding:20px;z-index:998}
-  .nav.open{display:flex}
+  .nav.open{display:flex !important; /* override media query */
+    flex-direction:column;
+    gap:12px;
+}
   .nav-toggle{display:block}
 
   .contact-form{
