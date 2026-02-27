@@ -1,80 +1,81 @@
 // Navigation toggle for small screens
 
 document.addEventListener('DOMContentLoaded', function(){
-    const nav = document.getElementById('nav');
-    const toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('nav');
+    var toggle = document.getElementById('navToggle');
 
-    // make sure elements exist before wiring events
+    // wire up hamburger toggle (no modern syntax)
     if(toggle && nav){
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', function(){
             nav.classList.toggle('open');
+            console.log('hamburger clicked, open=', nav.classList.contains('open'));
         });
     }
 
-    // Smooth scrolling and close mobile menu when any internal link is used
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', (e)=>{
-            const href = a.getAttribute('href');
-            if(href.length>1){
-                e.preventDefault();
-                const el = document.querySelector(href);
-                if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-                if(nav && nav.classList.contains('open')){
-                    nav.classList.remove('open');
+    // close mobile nav when a link is clicked; let browser handle scrolling
+    var links = document.querySelectorAll('a[href^="#"]');
+    for(var i=0;i<links.length;i++){
+        (function(a){
+            a.addEventListener('click', function(e){
+                var href = a.getAttribute('href');
+                if(href && href.length>1){
+                    if(nav && nav.classList.contains('open')){
+                        nav.classList.remove('open');
+                    }
+                    // no preventDefault: default anchor jump + CSS smooth behavior
                 }
-            }
-        });
-    });
+            });
+        })(links[i]);
+    }
 
-    // Project filter (if present)
-    const filters = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project');
-    filters.forEach(btn=>btn.addEventListener('click', ()=>{
-        filters.forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        projects.forEach(p=>{
-            if(f==='all' || p.dataset.type===f){
-                p.style.display = '';
-            } else {
-                p.style.display = 'none';
-            }
-        });
-    }));
+    // optional features unchanged (filters, slider, form)
+    var filters = document.querySelectorAll('.filter-btn');
+    var projects = document.querySelectorAll('.project');
+    for(i=0;i<filters.length;i++){
+        (function(btn){
+            btn.addEventListener('click', function(){
+                for(var j=0;j<filters.length;j++) filters[j].classList.remove('active');
+                btn.classList.add('active');
+                var f = btn.dataset.filter;
+                for(var k=0;k<projects.length;k++){
+                    var p = projects[k];
+                    if(f==='all' || p.dataset.type===f) p.style.display='';
+                    else p.style.display='none';
+                }
+            });
+        })(filters[i]);
+    }
 
-    // Testimonials slider simple
-    const track = document.querySelector('.testi-track');
-    const slides = document.querySelectorAll('.testi');
-    const prev = document.getElementById('tprev');
-    const next = document.getElementById('tnext');
-    let index = 0;
+    var track = document.querySelector('.testi-track');
+    var slides = document.querySelectorAll('.testi');
+    var prev = document.getElementById('tprev');
+    var next = document.getElementById('tnext');
+    var index = 0;
     function show(i){
         index = (i + slides.length) % slides.length;
-        if(track) track.style.transform = `translateX(-${index*100}%)`;
+        if(track) track.style.transform = 'translateX(-'+(index*100)+'%)';
     }
-    if(prev) prev.addEventListener('click', ()=> show(index-1));
-    if(next) next.addEventListener('click', ()=> show(index+1));
-    // auto rotate
-    let auto = setInterval(()=> show(index+1), 6000);
-    [prev,next,track].forEach(el=>{
+    if(prev) prev.addEventListener('click', function(){ show(index-1); });
+    if(next) next.addEventListener('click', function(){ show(index+1); });
+    var auto = setInterval(function(){ show(index+1); }, 6000);
+    [prev,next,track].forEach(function(el){
         if(el){
-            el.addEventListener('mouseenter', ()=> clearInterval(auto));
-            el.addEventListener('mouseleave', ()=> auto = setInterval(()=> show(index+1), 6000));
+            el.addEventListener('mouseenter', function(){ clearInterval(auto); });
+            el.addEventListener('mouseleave', function(){ auto = setInterval(function(){ show(index+1); }, 6000); });
         }
     });
 
-    // Contact form stub
-    const form = document.getElementById('contactForm');
+    var form = document.getElementById('contactForm');
     if(form){
-        form.addEventListener('submit', (e)=>{
+        form.addEventListener('submit', function(e){
             e.preventDefault();
-            const fd = new FormData(form);
-            const name = fd.get('name');
-            const btn = form.querySelector('button');
+            var fd = new FormData(form);
+            var name = fd.get('name');
+            var btn = form.querySelector('button');
             btn.textContent = 'Sending...';
-            setTimeout(()=>{
+            setTimeout(function(){
                 btn.textContent = 'Contact Me';
-                alert(`Thanks ${name}! Your message was received (demo).`);
+                alert('Thanks '+name+'! Your message was received (demo).');
                 form.reset();
             },900);
         });
