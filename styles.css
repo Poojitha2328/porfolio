@@ -509,13 +509,6 @@ body {
     flex-direction: column;     /* stack vertically on narrow screens */
   }
 }
-.projects{
-  text-align: center;
-  margin-top: 95px;
-}
-.services{
-  margin-top: -220px;
-}
-.about{
-  margin-top: -170px;
+.projects {
+  margin-top: 120px;
 }
