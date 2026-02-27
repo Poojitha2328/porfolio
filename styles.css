@@ -343,7 +343,8 @@ section{
     grid-template-columns:1fr;
   }
 
-  .nav{display:none}
+  .nav{display:none;position:absolute;top:var(--header-height);left:0;right:0;background:rgba(20,20,20,0.98);backdrop-filter:blur(10px);flex-direction:column;padding:20px;z-index:998}
+  .nav.open{display:flex}
   .nav-toggle{display:block}
 
   .contact-form{

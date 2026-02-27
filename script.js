@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function(){
 			const href = a.getAttribute('href');
 			if(href.length>1){
 				e.preventDefault();
+				// Close mobile nav
+				nav.classList.remove('open');
+				nav.style.display = '';
 				const el = document.querySelector(href);
 				if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
 			}
