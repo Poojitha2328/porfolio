@@ -5,6 +5,7 @@
   --accent:#ff7a18;
   --glass: rgba(255,255,255,0.03);
   --container:1200px;
+  --header-height:72px;
   --radius:10px;
 }
 
@@ -20,7 +21,7 @@ html{
 
 body{
   margin:0;
-  padding-top:0px; /* ✅ FIXED NAVBAR OFFSET */
+  padding-top:var(--header-height); /* reserve space for fixed header */
   font-family:Inter,system-ui,Segoe UI,Arial;
   background:linear-gradient(180deg,var(--bg),#101010 60%);
   color:#fff;
@@ -32,6 +33,11 @@ body{
   max-width:var(--container);
   margin:0 auto;
   padding:0 20px;
+}
+
+/* Make container padding smaller on very small screens */
+@media (max-width:420px){
+  .container{padding:0 12px}
 }
 .hero-photo img {
   width: 100%;
@@ -114,6 +120,8 @@ section{
 
 .hero-title{
   font-size:42px;
+  /* fluid heading */
+  font-size: clamp(26px, 5vw, 42px);
   margin:0;
   line-height:1.02;
 }
@@ -127,12 +135,19 @@ section{
 .hero-sub{
   color:var(--muted);
   max-width:560px;
+  width:100%;
 }
 
 .hero-cta{
   margin:18px 0;
   display:flex;
   gap:12px;
+}
+
+/* Buttons stack and stretch on narrow screens */
+@media (max-width:520px){
+  .hero-cta{flex-direction:column;align-items:flex-start}
+  .btn{width:100%;text-align:center}
 }
 
 .btn{
@@ -340,6 +355,27 @@ section{
     height:240px;
     margin:0 auto;
   }
+}
+
+/* Stronger small-screen adjustments */
+@media (max-width:520px){
+  .hero-photo{width:180px;height:180px}
+  .hero-sub{font-size:15px}
+  .hero-title{font-size:clamp(22px,6vw,30px)}
+  .socials a{width:38px;height:38px;font-size:16px}
+  .header-inner{padding:12px 0}
+  .site-header{backdrop-filter:blur(6px)}
+  .footer-inner{flex-direction:column;gap:12px}
+  .footer-nav a{margin-left:0;margin-right:12px}
+}
+
+@media (max-width:380px){
+  .hero-photo{width:140px;height:140px}
+  .hero-title{font-size:20px}
+  .hero-sub{font-size:14px}
+  .nav-toggle{font-size:22px}
+  .project-card img{height:140px}
+  .contact-form .btn{width:100%}
 }
 
 @media (max-width:520px){
