@@ -8,6 +8,12 @@
   --header-height:72px;
   --radius:10px;
 }
+section,
+.services,
+.projects,
+.contact {
+  scroll-margin-top: 90px;
+}
 
 *{box-sizing:border-box}
 html,body{
@@ -578,4 +584,14 @@ body {
 }
 .projects {
   margin-top: 155px;
+}
+@media (max-width: 768px) {
+  section {
+    min-height: auto;
+    padding: 100px 0;
+    align-items: flex-start;
+  }
+}
+.nav {
+  touch-action: manipulation;
 }
